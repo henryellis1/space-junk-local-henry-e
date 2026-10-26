@@ -37,5 +37,24 @@ function drawPlaceholder({ rotation, w, h }) {
 function timeToStringParts(timeMs) {
   // TODO (Phase 5): Round up to whole seconds, then split them into minutes
   // and leftover seconds. Seconds always have two digits.
-  return { minutes: "0", seconds: "00" };
+  const leftoverMs = timeMs % 1000
+
+  let totalSeconds = (timeMs - leftoverMs)/1000
+
+  if (leftoverMs > 0) {
+    totalSeconds = totalSeconds + 1
+  }
+
+  const leftoverSeconds = totalSeconds % 60
+  const minutes = (totalSeconds - leftoverSeconds)/60
+
+  const minutesText = String(minutes)
+  let secondsText = String(leftoverSeconds)
+  if (leftoverSeconds <  10) { 
+    secondsText = "0" + secondsText
+  }
+  return {
+    minutes: minutesText,
+    seconds: secondsText
+  }
 }
