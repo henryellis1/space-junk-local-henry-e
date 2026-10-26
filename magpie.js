@@ -27,13 +27,12 @@ class Magpie {
     drawEverywhere({
       offset: this.physics,
       drawFn: () => {
-        // TODO (Phase 4): If this.capturedJunk isn't null, draw it here, so
-        // the ship is drawn on top of it. Rotate by the Magpie's rotation,
-        // translate to (0, Magpie.CARGO_Y), and call Junk.drawJunk(). Use
-        // push() and pop() so the ship below isn't moved too.
+       
         if (this.capturedJunk) {
           push()
-
+          rotate(this.physics.rotation)
+          translate(0, Magpie.CARGO_Y)
+          Junk.drawJunk()
           pop()
         }
 
