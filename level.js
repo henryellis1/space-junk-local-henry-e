@@ -39,20 +39,23 @@ class Level {
    **/
   draw(score, lives) {
     push();
-    const {minutes, seconds} = timeToStringParts(this.timeLeft)
+    const {minutes, seconds} = timeToStringParts(this.timeLeft())
     fill(255)
     textSize(Level.HUD_TEXT_SIZE)
     textAlign(LEFT, TOP)
-    text('{minutes}:{seconds}', Level.HUD_PAD, Level.HUD_PAD)
+    text(`${minutes}:${seconds}`, Level.HUD_PAD, Level.HUD_PAD)
     textAlign(RIGHT, TOP)
     text(score, width - Level.HUD_PAD, Level.HUD_PAD)
 
     for (let i = 0; i < lives - 1; i++) {
       push()
-
-
+      translate(
+        Level.LIVES_PAD_LEFT + i * Level.LIVES_GAP,
+        height - Level.LIVES_PAD_BOTTOM
+      )
+      scale(Level.LIVES_SCALE)
+      Magpie.drawMagpie({rotation: 0, beam: false})
       pop()
-
     }
 
 
